@@ -46,6 +46,7 @@ public class Controller {
 	private float explosionY;   //explosion y coordinate
 	private float MissileX;    //missile x coordinate
 	private float MissileY;   //missile y coordinate
+	private int missileTime = 0; //keep track of frames since last missile shot
 
 
 	
@@ -175,14 +176,14 @@ public class Controller {
 		
 		if(Gdx.input.isKeyPressed(Keys.SPACE)){  //if user presses space
 			
-			/// add code to make creation one missile per second- done! test to make sure works
+			/// only one missle per every 30 frames equals half a second
+			if (missileTime >= 30 ){
+					
+					initMissile(); //create missile
+					missileTime = 0;//reset missileTime back to zero so user can't shoot until another half a second
 			
-			//limit to one second
-			do{ initMissile(); //create missile
-				time = System.currentTimeMillis(); //get current time in milliseconds
-				lastShot = time;  //lastshot set to the time the missile shot
 				}
-			while(time >= (lastShot + 1000)); //shoot next while time is greater than lastsot and 1000 miliseconds
+			
 	
 		}
 		if(Gdx.input.isKeyPressed(Keys.SPACE)){
@@ -200,7 +201,7 @@ public class Controller {
 		asteroidHit = false;   //change to false so can send message asteroidHit if hit in the next frame
 		processKeyboardInput();  //process keyboard input
 		processMouseInput();   //process mouse inuput
-		
+		++missileTime; //increment missile time since every time update is called it's another frame
 		// Update Asteroids
 		for(int i = 0; i < drawableObjects.size(); i++) {  //iterate through drawable objects which is list of game objects
 			GameObject gObg = drawableObjects.get(i); //initilaize a gameobject to the element indexed in the array list
