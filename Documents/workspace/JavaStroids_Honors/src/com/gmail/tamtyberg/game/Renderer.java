@@ -95,138 +95,356 @@ public class Renderer {
 			endBatch = new SpriteBatch();
 			startFont = new BitmapFont();
 			endFont = new BitmapFont();
+			//mode = 1;
+			//mode = 2;
+			mode = 3;
+			//mode = 4;
 			//gameMode(1);
-			gameMode(2);
+			//gameMode(2);
 			//gameMode(3);
-			input = new Scanner(System.in);
+			
 			}
 	
 		
 	 //render method main part of game
 		public void render(){
 		
-		/**if(!startGame && !gameOver){
-					
-					menuBatch.begin();
-					System.out.println("entered menu batch");
-					
-					startFont.setColor(Color.BLUE);
-					startFont.draw(menuBatch, "Enter 1, 2, 3, or 4 to select your game mode. Press Enter!", 50, (Gdx.graphics.getHeight()- 70));
-			
-					mode = input.nextInt();
-					gameMode(mode);
-					System.out.println("about to close batch");
-					menuBatch.end();
-			
-			
-			
-		}**/
 			
 
+			switch(mode){
 			
-						//shot = false;
-						spriteBatch.begin(); //calls sprit batch to begin/start
-						
-				
-					
-						 renderBackground(); //call to render background method 
-						 
-						 
-						 
-						 font.setColor(Color.YELLOW); //set font color to yellow
-						 font.draw(spriteBatch, "Tammy's JavaStroid Game", 50, (Gdx.graphics.getHeight()- 40)); //draw font set text and location
-						 font.setColor(Color.GREEN);//set font color to green
-						 font.draw(spriteBatch, "Press Space to Shoot and Up to move.", 50, (Gdx.graphics.getHeight()- 70));//draw font set text and location
-						 scoreKeeper.setColor(Color.BLUE);//set score font color to blue
-						 scoreKeeper.draw(spriteBatch, "Score: " + score, Gdx.graphics.getWidth()- 80, Gdx.graphics.getHeight()- 20); //draw score in upper righthand corner of the screen
-						 
-					
-						 for(GameObject gObj : control.getDrawableObjects()){ //iterate through drawable objects
-							 	 
-							 		gObj.sprite.draw(spriteBatch); //draw the object
-						}
-						
-						
-						//if ship crashed 
-						if(control.isShipCrashed() &&
-								!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
-							
-										shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //the state time is added delta time
-										currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false); //currentframe explosion equals this ?? not sure
-										spriteBatch.draw(currentFrameExplosion, control.getExplosionX() - Constants.SHIP_WIDTH,  //draw explosion by ship pos
-												control.getExplosionY() - Constants.SHIP_HEIGHT);
-										
-										font.setColor(Color.RED); //set font color to red
-										font.draw(spriteBatch, "Ship Crashed!!!", control.getExplosionX() - Constants.SHIP_WIDTH  //set font to location of where ship crashed
-												, control.getExplosionY() - Constants.SHIP_HEIGHT);
-						}
-						
-						//if asteroid hit and animation didnt happen yet
-						if(control.isAsteroidHit() && 
-								!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
-							
-											shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //update shipExplosionStateTime
-											currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false);
-											spriteBatch.draw(currentFrameExplosion, control.getMissileX(),control.getMissileY());//draw explosion by missile coordinates
-											font2.setColor(Color.RED); //set font color to red
-											shot = true;
-											hitCounter++;
-											score += 10; 
-											//hit =  true;
-											System.out.println("Asteroid hit comment should show");
-											
-													
-						}
-						
-						
-						
-					/*	 //shot should always be true so comment gets redrawn each frame on the screen otherwise the comment is shown for a millisecond
-						 if(shot){
-							 
-							// if(frameCounter != 4){
-							 //int xm = (int) (control.getMissileX()+10);
-								//int ym = (int) (control.getMissileY()+10);
-								font2.draw(spriteBatch, Constants.positiveList.get(commentCounter), 50, 50); //set font to location of where ship crashed
-								
-								//if(hitCounter % 3 == 0){
-										//shot = false;
-										if(commentCounter ==  Constants.positiveList.size()-1){
-											commentCounter = 0;
-											
-								       }else{
-								    	   	
-								    	   	commentCounter++;
-								       	}
-								}
-								
-							//}
-						 */
-						//frameCounter++;
-						 
-						 
-						 if(shot){
-							 
-							 if(frameCounter != 60){
-								 font2.setScale(2,2);
-								 font2.draw(spriteBatch, comments.get(commentCounter), 50, 50);
-								 frameCounter++;
-								 
-							 } else{
-								 
-								 frameCounter = 0;
-								 commentCounter++;
-								 shot = false;
-							 }
-								 
-								 
-							 }
-						
-						
-						spriteBatch.end(); //end sprite batch
+			case 1:
+				gameMode(mode);
+				//shot = false;
+				spriteBatch.begin(); //calls sprit batch to begin/start
+				 renderBackground(); //call to render background method 
+				 
 		
-			}//end of game loop
-						
+				 
+				
+				 
+				 font.setColor(Color.YELLOW); //set font color to yellow
+				 font.draw(spriteBatch, "Tammy's JavaStroid Game", 50, (Gdx.graphics.getHeight()- 40)); //draw font set text and location
+				 font.setColor(Color.GREEN);//set font color to green
+				 font.draw(spriteBatch, "Press Space to Shoot and Up to move.", 50, (Gdx.graphics.getHeight()- 70));//draw font set text and location
+				 scoreKeeper.setColor(Color.BLUE);//set score font color to blue
+				 scoreKeeper.draw(spriteBatch, "Score: " + score, Gdx.graphics.getWidth()- 80, Gdx.graphics.getHeight()- 20); //draw score in upper righthand corner of the screen
+				 
+			
+				 for(GameObject gObj : control.getDrawableObjects()){ //iterate through drawable objects
+					 	 
+					 		gObj.sprite.draw(spriteBatch); //draw the object
+				}
+				
+				
+				//if ship crashed 
+				if(control.isShipCrashed() &&
+						!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
+					
+								shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //the state time is added delta time
+								currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false); //currentframe explosion equals this ?? not sure
+								spriteBatch.draw(currentFrameExplosion, control.getExplosionX() - Constants.SHIP_WIDTH,  //draw explosion by ship pos
+										control.getExplosionY() - Constants.SHIP_HEIGHT);
+								
+								font.setColor(Color.RED); //set font color to red
+								font.draw(spriteBatch, "Ship Crashed!!!", control.getExplosionX() - Constants.SHIP_WIDTH  //set font to location of where ship crashed
+										, control.getExplosionY() - Constants.SHIP_HEIGHT);
+				}
+				
+				//if asteroid hit and animation didnt happen yet
+				if(control.isAsteroidHit() && 
+						!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
+					
+									shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //update shipExplosionStateTime
+									currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false);
+									spriteBatch.draw(currentFrameExplosion, control.getMissileX(),control.getMissileY());//draw explosion by missile coordinates
+									font2.setColor(Color.RED); //set font color to red
+									shot = true;
+									hitCounter++;
+									score += 10; 
+									//hit =  true;
+									System.out.println("Asteroid hit comment should show");
+									
+											
+				}
+				
+				
+				
 	
+				 
+				 if(shot){
+					 
+					 if(frameCounter != 60){
+						 font2.setScale(2,2);
+						 font2.draw(spriteBatch, comments.get(commentCounter), 50, 50);
+						 frameCounter++;
+						 
+					 } else{
+						 
+						 frameCounter = 0;
+						 commentCounter++;
+						 shot = false;
+					 }
+						 
+						 
+					 }
+				
+				
+				spriteBatch.end(); //end sprite batch
+
+			break;
+			
+	
+			case 2:
+			
+				gameMode(mode);
+				//shot = false;
+				spriteBatch.begin(); //calls sprit batch to begin/start
+				 renderBackground(); //call to render background method 
+				 
+		
+				 
+				
+				 
+				 font.setColor(Color.YELLOW); //set font color to yellow
+				 font.draw(spriteBatch, "Tammy's JavaStroid Game", 50, (Gdx.graphics.getHeight()- 40)); //draw font set text and location
+				 font.setColor(Color.GREEN);//set font color to green
+				 font.draw(spriteBatch, "Press Space to Shoot and Up to move.", 50, (Gdx.graphics.getHeight()- 70));//draw font set text and location
+				 scoreKeeper.setColor(Color.BLUE);//set score font color to blue
+				 scoreKeeper.draw(spriteBatch, "Score: " + score, Gdx.graphics.getWidth()- 80, Gdx.graphics.getHeight()- 20); //draw score in upper righthand corner of the screen
+				 
+			
+				 for(GameObject gObj : control.getDrawableObjects()){ //iterate through drawable objects
+					 	 
+					 		gObj.sprite.draw(spriteBatch); //draw the object
+				}
+				
+				
+				//if ship crashed 
+				if(control.isShipCrashed() &&
+						!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
+					
+								shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //the state time is added delta time
+								currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false); //currentframe explosion equals this ?? not sure
+								spriteBatch.draw(currentFrameExplosion, control.getExplosionX() - Constants.SHIP_WIDTH,  //draw explosion by ship pos
+										control.getExplosionY() - Constants.SHIP_HEIGHT);
+								
+								font.setColor(Color.RED); //set font color to red
+								font.draw(spriteBatch, "Ship Crashed!!!", control.getExplosionX() - Constants.SHIP_WIDTH  //set font to location of where ship crashed
+										, control.getExplosionY() - Constants.SHIP_HEIGHT);
+				}
+				
+				//if asteroid hit and animation didnt happen yet
+				if(control.isAsteroidHit() && 
+						!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
+					
+									shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //update shipExplosionStateTime
+									currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false);
+									spriteBatch.draw(currentFrameExplosion, control.getMissileX(),control.getMissileY());//draw explosion by missile coordinates
+									font2.setColor(Color.RED); //set font color to red
+									shot = true;
+									hitCounter++;
+									score += 10; 
+									//hit =  true;
+									System.out.println("Asteroid hit comment should show");
+									
+											
+				}
+				
+				
+				
+	
+				 
+				 if(shot){
+					 
+					 if(frameCounter != 60){
+						 font2.setScale(2,2);
+						 font2.draw(spriteBatch, comments.get(commentCounter), 50, 50);
+						 frameCounter++;
+						 
+					 } else{
+						 
+						 frameCounter = 0;
+						 commentCounter++;
+						 shot = false;
+					 }
+						 
+						 
+					 }
+				
+				
+				spriteBatch.end(); //end sprite batch
+				
+				break;
+				
+			case 3:
+				
+				gameMode(mode);
+				//shot = false;
+				spriteBatch.begin(); //calls sprit batch to begin/start
+				 renderBackground(); //call to render background method 
+				 
+		
+				 
+				
+				 
+				 font.setColor(Color.YELLOW); //set font color to yellow
+				 font.draw(spriteBatch, "Tammy's JavaStroid Game", 50, (Gdx.graphics.getHeight()- 40)); //draw font set text and location
+				 font.setColor(Color.GREEN);//set font color to green
+				 font.draw(spriteBatch, "Press Space to Shoot and Up to move.", 50, (Gdx.graphics.getHeight()- 70));//draw font set text and location
+				 scoreKeeper.setColor(Color.BLUE);//set score font color to blue
+				 scoreKeeper.draw(spriteBatch, "Score: " + score, Gdx.graphics.getWidth()- 80, Gdx.graphics.getHeight()- 20); //draw score in upper righthand corner of the screen
+				 
+			
+				 for(GameObject gObj : control.getDrawableObjects()){ //iterate through drawable objects
+					 	 
+					 		gObj.sprite.draw(spriteBatch); //draw the object
+				}
+				
+				
+				//if ship crashed 
+				if(control.isShipCrashed() &&
+						!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
+					
+								shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //the state time is added delta time
+								currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false); //currentframe explosion equals this ?? not sure
+								spriteBatch.draw(currentFrameExplosion, control.getExplosionX() - Constants.SHIP_WIDTH,  //draw explosion by ship pos
+										control.getExplosionY() - Constants.SHIP_HEIGHT);
+								
+								font.setColor(Color.RED); //set font color to red
+								font.draw(spriteBatch, "Ship Crashed!!!", control.getExplosionX() - Constants.SHIP_WIDTH  //set font to location of where ship crashed
+										, control.getExplosionY() - Constants.SHIP_HEIGHT);
+				}
+				
+				//if asteroid hit and animation didnt happen yet
+				if(control.isAsteroidHit() && 
+						!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
+					
+									shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //update shipExplosionStateTime
+									currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false);
+									spriteBatch.draw(currentFrameExplosion, control.getMissileX(),control.getMissileY());//draw explosion by missile coordinates
+									font2.setColor(Color.RED); //set font color to red
+									shot = true;
+									hitCounter++;
+									score += 10; 
+									//hit =  true;
+									System.out.println("Asteroid hit comment should show");
+									
+											
+				}
+				
+				
+				
+	
+				 
+				 if(shot){
+					 
+					 if(frameCounter != 60){
+						 font2.setScale(2,2);
+						 font2.draw(spriteBatch, comments.get(commentCounter), 50, 50);
+						 frameCounter++;
+						 
+					 } else{
+						 
+						 frameCounter = 0;
+						 commentCounter++;
+						 shot = false;
+					 }
+						 
+						 
+					 }
+				
+				
+				spriteBatch.end(); //end sprite batch
+				
+				break;
+				
+			case 4:
+			
+				//shot = false;
+				spriteBatch.begin(); //calls sprit batch to begin/start
+				 renderBackground(); //call to render background method 
+				 
+		
+				 
+				
+				 
+				 font.setColor(Color.YELLOW); //set font color to yellow
+				 font.draw(spriteBatch, "Tammy's JavaStroid Game", 50, (Gdx.graphics.getHeight()- 40)); //draw font set text and location
+				 font.setColor(Color.GREEN);//set font color to green
+				 font.draw(spriteBatch, "Press Space to Shoot and Up to move.", 50, (Gdx.graphics.getHeight()- 70));//draw font set text and location
+				 scoreKeeper.setColor(Color.BLUE);//set score font color to blue
+				 scoreKeeper.draw(spriteBatch, "Score: " + score, Gdx.graphics.getWidth()- 80, Gdx.graphics.getHeight()- 20); //draw score in upper righthand corner of the screen
+				 
+			
+				 for(GameObject gObj : control.getDrawableObjects()){ //iterate through drawable objects
+					 	 
+					 		gObj.sprite.draw(spriteBatch); //draw the object
+				}
+				
+				
+				//if ship crashed 
+				if(control.isShipCrashed() &&
+						!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
+					
+								shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //the state time is added delta time
+								currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false); //currentframe explosion equals this ?? not sure
+								spriteBatch.draw(currentFrameExplosion, control.getExplosionX() - Constants.SHIP_WIDTH,  //draw explosion by ship pos
+										control.getExplosionY() - Constants.SHIP_HEIGHT);
+								
+								font.setColor(Color.RED); //set font color to red
+								font.draw(spriteBatch, "Ship Crashed!!!", control.getExplosionX() - Constants.SHIP_WIDTH  //set font to location of where ship crashed
+										, control.getExplosionY() - Constants.SHIP_HEIGHT);
+				}
+				
+				//if asteroid hit and animation didnt happen yet
+				if(control.isAsteroidHit() && 
+						!explosionAnim.isAnimationFinished(shipExplosionStateTime)){
+					
+									shipExplosionStateTime += Gdx.graphics.getDeltaTime(); //update shipExplosionStateTime
+									currentFrameExplosion = explosionAnim.getKeyFrame(shipExplosionStateTime, false);
+									spriteBatch.draw(currentFrameExplosion, control.getMissileX(),control.getMissileY());//draw explosion by missile coordinates
+									font2.setColor(Color.RED); //set font color to red
+									//shot = true;
+									hitCounter++;
+									score += 10; 
+									//hit =  true;
+									System.out.println("Asteroid hit comment should show");
+									
+											
+				}
+				
+				
+				
+	
+				 
+				 /*if(shot){
+					 
+					 if(frameCounter != 60){
+						 font2.setScale(2,2);
+						 font2.draw(spriteBatch, comments.get(commentCounter), 50, 50);
+						 frameCounter++;
+						 
+					 } else{
+						 
+						 frameCounter = 0;
+						 commentCounter++;
+						 shot = false;
+					 }
+						 
+						 
+					 }
+				*/
+				
+				spriteBatch.end(); //end sprite batch
+			
+				break;
+			}
+			
+			}
+			
+						
+		
 		
 		private void gameMode(int mode2) {
 			
